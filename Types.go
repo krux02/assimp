@@ -67,7 +67,109 @@ func (mi *MemoryInfo) Total() uint {
 
 type Vector2 C.struct_aiVector2D
 type Vector3 C.struct_aiVector3D
-type Color4  C.struct_aiColor4D
+type Color4 C.struct_aiColor4D
 type Quaternion C.struct_aiQuaternion
 type Matrix3x3 C.struct_aiMatrix3x3
 type Matrix4x4 C.struct_aiMatrix4x4
+
+func (v *Vector2) X() float32 {
+	return float32(v.x)
+}
+
+func (v *Vector2) Y() float32 {
+	return float32(v.x)
+}
+
+func (v *Vector2) Values() [2]float32 {
+	return [2]float32{float32(v.x), float32(v.y)}
+}
+
+func (v *Vector3) X() float32 {
+	return float32(v.x)
+}
+
+func (v *Vector3) Y() float32 {
+	return float32(v.x)
+}
+
+func (v *Vector3) Z() float32 {
+	return float32(v.z)
+}
+
+func (v *Vector3) Values() [3]float32 {
+	return [3]float32{float32(v.x), float32(v.y), float32(v.z)}
+}
+
+func (v *Quaternion) W() float32 {
+	return float32(v.x)
+}
+
+func (v *Quaternion) X() float32 {
+	return float32(v.x)
+}
+
+func (v *Quaternion) Y() float32 {
+	return float32(v.x)
+}
+
+func (v *Quaternion) Z() float32 {
+	return float32(v.z)
+}
+
+// order w,x,y,z
+func (q *Quaternion) Values() [4]float32 {
+	return [4]float32{float32(q.w), float32(q.x), float32(q.y), float32(q.z)}
+}
+
+func (c *Color3) R() float32 {
+	return float32(c.r)
+}
+
+func (c *Color3) G() float32 {
+	return float32(c.g)
+}
+
+func (c *Color3) B() float32 {
+	return float32(c.b)
+}
+
+func (c *Color3) Values() [3]float32 {
+	return [3]float32{float32(c.r), float32(c.g), float32(c.b)}
+}
+
+func (c *Color4) R() float32 {
+	return float32(c.r)
+}
+
+func (c *Color4) G() float32 {
+	return float32(c.g)
+}
+
+func (c *Color4) B() float32 {
+	return float32(c.b)
+}
+
+func (c *Color4) A() float32 {
+	return float32(c.a)
+}
+
+func (c *Color4) Values() [4]float32 {
+	return [4]float32{float32(c.r), float32(c.g), float32(c.b), float32(c.a)}
+}
+
+func (m *Matrix3x3) Values() [3][3]float32 {
+	return [3][3]float32{
+		[3]float32{float32(m.a1), float32(m.a2), float32(m.a3)},
+		[3]float32{float32(m.b1), float32(m.b2), float32(m.b3)},
+		[3]float32{float32(m.c1), float32(m.c2), float32(m.c3)},
+	}
+}
+
+func (m *Matrix4x4) Values() [4][4]float32 {
+	return [4][4]float32{
+		[4]float32{float32(m.a1), float32(m.a2), float32(m.a3), float32(m.a4)},
+		[4]float32{float32(m.b1), float32(m.b2), float32(m.b3), float32(m.b4)},
+		[4]float32{float32(m.c1), float32(m.c2), float32(m.c3), float32(m.c4)},
+		[4]float32{float32(m.d1), float32(m.d2), float32(m.d3), float32(m.d4)},
+	}
+}
