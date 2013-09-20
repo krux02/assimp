@@ -3,6 +3,7 @@ package assimp
 //#cgo linux LDFLAGS: -L/usr/local/lib -lassimp -lstdc++
 //#include <stdlib.h>
 //#include "Import.h"
+//#include "assimp/postprocess.h"
 import "C"
 
 import (
@@ -61,7 +62,42 @@ func ImportFileFromMemoryWithProperties(data []byte, flags uint, hint string, pr
 	return (*Scene)(C.aiImportFileFromMemoryWithProperties(pBuffer, pLength, pFlags, pHint, pProps))
 }
 
-func (scene *Scene) ApplyPostProcessing(flags uint) *Scene {
+type PostProcessSteps C.enum_aiPostProcessSteps
+
+const (
+	Process_CalcTangentSpace                PostProcessSteps = C.aiProcess_CalcTangentSpace
+	Process_JoinIdenticalVertices           PostProcessSteps = C.aiProcess_JoinIdenticalVertices
+	Process_MakeLeftHanded                  PostProcessSteps = C.aiProcess_MakeLeftHanded
+	Process_Triangulate                     PostProcessSteps = C.aiProcess_Triangulate
+	Process_RemoveComponent                 PostProcessSteps = C.aiProcess_RemoveComponent
+	Process_GenNormals                      PostProcessSteps = C.aiProcess_GenNormals
+	Process_GenSmoothNormals                PostProcessSteps = C.aiProcess_GenSmoothNormals
+	Process_SplitLargeMeshes                PostProcessSteps = C.aiProcess_SplitLargeMeshes
+	Process_PreTransformVertices            PostProcessSteps = C.aiProcess_PreTransformVertices
+	Process_LimitBoneWeights                PostProcessSteps = C.aiProcess_LimitBoneWeights
+	Process_ValidateDataStructure           PostProcessSteps = C.aiProcess_ValidateDataStructure
+	Process_ImproveCacheLocality            PostProcessSteps = C.aiProcess_ImproveCacheLocality
+	Process_RemoveRedundantMaterials        PostProcessSteps = C.aiProcess_RemoveRedundantMaterials
+	Process_FixInfacingNormals              PostProcessSteps = C.aiProcess_FixInfacingNormals
+	Process_SortByPType                     PostProcessSteps = C.aiProcess_SortByPType
+	Process_FindDegenerates                 PostProcessSteps = C.aiProcess_FindDegenerates
+	Process_FindInvalidData                 PostProcessSteps = C.aiProcess_FindInvalidData
+	Process_GenUVCoords                     PostProcessSteps = C.aiProcess_GenUVCoords
+	Process_TransformUVCoords               PostProcessSteps = C.aiProcess_TransformUVCoords
+	Process_FindInstances                   PostProcessSteps = C.aiProcess_FindInstances
+	Process_OptimizeMeshes                  PostProcessSteps = C.aiProcess_OptimizeMeshes
+	Process_OptimizeGraph                   PostProcessSteps = C.aiProcess_OptimizeGraph
+	Process_FlipUVs                         PostProcessSteps = C.aiProcess_FlipUVs
+	Process_FlipWindingOrder                PostProcessSteps = C.aiProcess_FlipWindingOrder
+	Process_SplitByBoneCount                PostProcessSteps = C.aiProcess_SplitByBoneCount
+	Process_Debone                          PostProcessSteps = C.aiProcess_Debone
+	Process_ConvertToLeftHanded             PostProcessSteps = C.aiProcess_ConvertToLeftHanded
+	ProcessPreset_TargetRealtime_Fast       PostProcessSteps = C.aiProcessPreset_TargetRealtime_Fast
+	ProcessPreset_TargetRealtime_Quality    PostProcessSteps = C.aiProcessPreset_TargetRealtime_Quality
+	ProcessPreset_TargetRealtime_MaxQuality PostProcessSteps = C.aiProcessPreset_TargetRealtime_MaxQuality
+)
+
+func (scene *Scene) ApplyPostProcessing(flags PostProcessSteps) *Scene {
 	pScene := (*C.struct_aiScene)(scene)
 	pFlags := C.uint(flags)
 
