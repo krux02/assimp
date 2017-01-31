@@ -77,7 +77,7 @@ func (v *Vector2) X() float32 {
 }
 
 func (v *Vector2) Y() float32 {
-	return float32(v.x)
+	return float32(v.y)
 }
 
 func (v *Vector2) Values() [2]float32 {
@@ -89,7 +89,7 @@ func (v *Vector3) X() float32 {
 }
 
 func (v *Vector3) Y() float32 {
-	return float32(v.x)
+	return float32(v.y)
 }
 
 func (v *Vector3) Z() float32 {
@@ -109,7 +109,7 @@ func (v *Quaternion) X() float32 {
 }
 
 func (v *Quaternion) Y() float32 {
-	return float32(v.x)
+	return float32(v.y)
 }
 
 func (v *Quaternion) Z() float32 {
