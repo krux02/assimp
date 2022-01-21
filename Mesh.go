@@ -70,6 +70,10 @@ func (b *Bone) Weights() []VertexWeight {
 	return result
 }
 
+func (b *Bone) OffsetMatrix() Matrix4x4 {
+	return Matrix4x4(b.mOffsetMatrix)
+}
+
 type PrimitiveType C.enum_aiPrimitiveType
 
 const (
