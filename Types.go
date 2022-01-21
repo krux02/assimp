@@ -101,7 +101,7 @@ func (v *Vector3) Values() [3]float32 {
 }
 
 func (v *Quaternion) W() float32 {
-	return float32(v.x)
+	return float32(v.w)
 }
 
 func (v *Quaternion) X() float32 {
